@@ -1,0 +1,18 @@
+{
+  "name": "Bússola da Líder | Guia & Motivação Diária",
+  "short_name": "Bússola Líder",
+  "description": "Painel diário de blindagem emocional e liderança estratégica para gestoras.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c0f1d",
+  "theme_color": "#151a30",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

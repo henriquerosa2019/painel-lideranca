@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Bússola da Líder | Guia & Motivação Diária</title>
+  
+  <!-- PWA & Mobile Meta -->
+  <meta name="theme-color" content="#1e1b4b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bússola Líder">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Splash Screen / Cover Modal -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-card">
+      <div class="splash-image-wrapper">
+        <img src="cover.jpg" alt="Líder Confiante com Bússola e Flores" class="splash-img">
+        <div class="splash-overlay"></div>
+      </div>
+      
+      <div class="splash-details">
+        <div class="splash-badge">🌸 BÚSSOLA DA LÍDER • EDIÇÃO ESPECIAL ✨</div>
+        <h2 class="splash-title">Seu Espaço de Força & Paz</h2>
+        <p class="splash-quote">
+          “Você não precisa carregar o mundo para provar que é digna de liderar. Sua competência se expressa na serenidade da sua postura e na firmeza dos seus limites.” 🕊️🌿✨
+        </p>
+        <div class="splash-pills">
+          <span class="pill-item">💖 Autovalidação</span>
+          <span class="pill-item">🛡️ Limites Saudáveis</span>
+          <span class="pill-item">🌟 Liderança Serena</span>
+        </div>
+        <button class="splash-enter-btn" id="btn-enter-app">
+          <span>Acessar Meu Painel Diário</span>
+          <span class="btn-arrow">✨</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Top Bar -->
+    <header class="header">
+      <div class="header-top">
+        <span class="badge" id="current-date-badge">Hoje</span>
+        <div class="header-actions">
+          <button id="btn-show-cover" class="icon-btn" title="Ver Capa Inspiradora" aria-label="Ver capa">
+            <span>🌸</span>
+          </button>
+          <button id="btn-theme-toggle" class="icon-btn" aria-label="Alternar tema">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+      <h1 class="app-title">Bússola da Líder</h1>
+      <p class="app-subtitle" id="greeting-text">Liderança serena, limites firmes e clareza mental.</p>
+    </header>
+
+    <!-- Day Selector Carousel -->
+    <nav class="day-selector-container">
+      <div class="day-selector" id="day-selector">
+        <button class="day-btn" data-day="1">Seg</button>
+        <button class="day-btn" data-day="2">Ter</button>
+        <button class="day-btn" data-day="3">Qua</button>
+        <button class="day-btn" data-day="4">Qui</button>
+        <button class="day-btn" data-day="5">Sex</button>
+        <button class="day-btn" data-day="6">Sáb</button>
+        <button class="day-btn" data-day="0">Dom</button>
+      </div>
+    </nav>
+
+    <!-- Period Tabs (Morning vs Night) -->
+    <div class="period-tabs">
+      <button class="period-tab active" id="tab-morning" data-period="morning">
+        <span class="tab-icon">🌅</span>
+        <div class="tab-info">
+          <span class="tab-title">Manhã</span>
+          <span class="tab-sub">Foco & Time</span>
+        </div>
+      </button>
+      <button class="period-tab" id="tab-night" data-period="night">
+        <span class="tab-icon">🌙</span>
+        <div class="tab-info">
+          <span class="tab-title">Noite</span>
+          <span class="tab-sub">Blindagem & Chefia</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Main Card Content -->
+    <main class="card-section">
+      <div class="quote-card" id="quote-card">
+        <div class="card-meta">
+          <span class="category-pill" id="card-category">Foco & Ação</span>
+          <span class="target-pill" id="card-target">Com o Time</span>
+        </div>
+
+        <h2 class="card-headline" id="card-headline">Retomada do Leme</h2>
+
+        <div class="quote-wrapper">
+          <div class="quote-symbol">“</div>
+          <p class="quote-text" id="quote-text">
+            Carregando mensagem...
+          </p>
+        </div>
+
+        <div class="tactical-box">
+          <div class="tactical-title">
+            <span class="tactical-icon">💡</span>
+            <strong>Ação Tática Recomendada</strong>
+          </div>
+          <p class="tactical-text" id="tactical-text">
+            Carregando ação prática...
+          </p>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="card-actions">
+          <button class="action-btn" id="btn-audio" title="Ouvir em áudio">
+            <span class="btn-icon">🔊</span>
+            <span class="btn-label" id="audio-label">Ouvir</span>
+          </button>
+          <button class="action-btn" id="btn-copy" title="Copiar mensagem">
+            <span class="btn-icon">📋</span>
+            <span class="btn-label" id="copy-label">Copiar</span>
+          </button>
+          <button class="action-btn whatsapp-btn" id="btn-whatsapp" title="Enviar para WhatsApp">
+            <span class="btn-icon">💬</span>
+            <span class="btn-label">WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Decompression Notebook (2 Minutes) -->
+    <section class="journal-section">
+      <div class="journal-header" id="journal-toggle">
+        <div class="journal-title-wrap">
+          <span class="journal-icon">✍️</span>
+          <div>
+            <h3>Caderno de Descompressão</h3>
+            <span class="journal-sub">2 minutos para aliviar o peso do dia</span>
+          </div>
+        </div>
+        <span class="toggle-arrow" id="journal-arrow">▼</span>
+      </div>
+
+      <div class="journal-content" id="journal-content">
+        <div class="input-group">
+          <label for="win-input">
+            <span class="label-badge victory">1</span>
+            Uma microvitória ou algo que deu certo hoje:
+          </label>
+          <textarea id="win-input" rows="2" placeholder="Ex: Consegui alinhar a demanda com fulano sem me alterar..."></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="release-input">
+            <span class="label-badge shield">2</span>
+            Uma cobrança ou desatenção que decidi NÃO levar para o lado pessoal:
+          </label>
+          <textarea id="release-input" rows="2" placeholder="Ex: O e-mail frio da diretoria diz respeito ao estresse deles, não à minha competência..."></textarea>
+        </div>
+
+        <div class="journal-footer">
+          <button class="primary-btn" id="btn-save-journal">Salvar Minha Paz</button>
+          <span class="save-status" id="save-status"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stoic Circles of Control Card -->
+    <section class="control-section">
+      <div class="control-card">
+        <h3>🛡️ Bússola do Foco Executivo</h3>
+        <div class="control-grid">
+          <div class="control-box inside">
+            <span class="box-tag">O que está no MEU controle</span>
+            <ul>
+              <li>Minha clareza com o time</li>
+              <li>O tom da minha resposta</li>
+              <li>A hora que desligo o computador</li>
+              <li>Minhas pausas e sono</li>
+            </ul>
+          </div>
+          <div class="control-box outside">
+            <span class="box-tag">O que NÃO está no meu controle</span>
+            <ul>
+              <li>O humor e ego da chefia</li>
+              <li>A desmotivação prévia do time</li>
+              <li>Se eles vão me elogiar ou não</li>
+              <li>A urgência fabricada por outros</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install PWA Prompt Banner -->
+    <footer class="install-footer" id="install-guide">
+      <p class="install-tip">
+        📲 <strong>Instale no seu celular:</strong> No Safari (iPhone), toque em <em>Compartilhar</em> e <em>"Adicionar à Tela de Início"</em>. No Chrome (Android), toque nos <em>3 pontinhos</em> e <em>"Instalar aplicativo"</em>.
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
