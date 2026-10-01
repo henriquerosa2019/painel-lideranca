@@ -277,25 +277,52 @@ function setupEventListeners() {
   btnSaveJournal.addEventListener('click', saveJournalEntry);
 
   // Splash Screen Cover Handlers
-  if (btnEnterApp) {
-    btnEnterApp.addEventListener('click', () => {
+  const btnCloseSplash = document.getElementById('btn-close-splash');
+
+  const closeSplash = () => {
+    if (splashScreen) {
       splashScreen.classList.add('hidden');
       sessionStorage.setItem('cover_seen', 'true');
+    }
+  };
+
+  const openSplash = () => {
+    if (splashScreen) {
+      splashScreen.classList.remove('hidden');
+    }
+  };
+
+  if (btnEnterApp) {
+    btnEnterApp.addEventListener('click', closeSplash);
+    btnEnterApp.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      closeSplash();
+    });
+  }
+
+  if (btnCloseSplash) {
+    btnCloseSplash.addEventListener('click', closeSplash);
+    btnCloseSplash.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      closeSplash();
     });
   }
 
   if (btnShowCover) {
-    btnShowCover.addEventListener('click', () => {
-      splashScreen.classList.remove('hidden');
-    });
+    btnShowCover.addEventListener('click', openSplash);
   }
 
   // Close splash screen if clicked outside card
   splashScreen.addEventListener('click', (e) => {
     if (e.target === splashScreen) {
-      splashScreen.classList.add('hidden');
+      closeSplash();
     }
   });
+
+  // If already seen in this session, hide immediately
+  if (sessionStorage.getItem('cover_seen') === 'true') {
+    splashScreen.classList.add('hidden');
+  }
 }
 
 // Text-to-speech functionality
