@@ -69,16 +69,16 @@
       <p class="app-subtitle" id="greeting-text">Liderança serena, limites firmes e clareza mental.</p>
     </header>
 
-    <!-- Day Selector Carousel -->
+    <!-- Month Journey Progress & Phase Bar -->
+    <div class="month-header">
+      <div class="phase-indicator" id="phase-indicator">Fase 1: Blindagem & Limites</div>
+      <div class="day-counter" id="day-counter">Dia 1 de 31</div>
+    </div>
+
+    <!-- 31 Days Selector Carousel -->
     <nav class="day-selector-container">
       <div class="day-selector" id="day-selector">
-        <button class="day-btn" data-day="1">Seg</button>
-        <button class="day-btn" data-day="2">Ter</button>
-        <button class="day-btn" data-day="3">Qua</button>
-        <button class="day-btn" data-day="4">Qui</button>
-        <button class="day-btn" data-day="5">Sex</button>
-        <button class="day-btn" data-day="6">Sáb</button>
-        <button class="day-btn" data-day="0">Dom</button>
+        <!-- Rendered dynamically by app.js (Days 1 to 31) -->
       </div>
     </nav>
 
@@ -218,6 +218,7 @@
 
   </div>
 
+  <script src="messages.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

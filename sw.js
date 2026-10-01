@@ -1,7 +1,8 @@
-const CACHE_NAME = 'bussola-lider-v3';
+const CACHE_NAME = 'bussola-lider-v4';
 const ASSETS = [
   './index.html',
   './styles.css',
+  './messages.js',
   './app.js',
   './manifest.json',
   './icon.svg',

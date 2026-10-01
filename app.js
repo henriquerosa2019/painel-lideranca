@@ -1,134 +1,21 @@
-// Database of 7 Days - 2 Messages Per Day + Tactical Strategies
-const messagesData = {
-  1: { // Segunda-feira
-    dayName: "Segunda-feira",
-    morning: {
-      category: "Foco & Ação",
-      target: "Com o Time",
-      headline: "A Retomada do Leme",
-      message: "Hoje, você não precisa consertar toda a desmotivação do time em um dia. Escolha ouvir mais do que cobrar. Pessoas desmotivadas costumam estar, na verdade, sem clareza ou sem voz. Seja a líder que dá rumo simples e previsível: foque em uma única prioridade clara para a equipe hoje.",
-      tactical: "Faça um alinhamento de 10 minutos focado apenas na meta #1 do dia. Elimine 2 reuniões desnecessárias da agenda da sua equipe."
-    },
-    night: {
-      category: "Blindagem Emocional",
-      target: "Autovalidação & Chefia",
-      headline: "Seu Valor Não Depende de Aplausos",
-      message: "O silêncio ou a frieza da alta gestão não diminuem o valor da sua competência. Você foi a escolha natural para este cargo por mérito real, não por favor. Seu trabalho é entregar soluções consistentes, não implorar por aprovação. Respire fundo: o expediente acabou e sua paz não é negociável.",
-      tactical: "Feche a tampa do computador e não cheque e-mails ou mensagens corporativas no celular até as 08h de amanhã."
-    }
-  },
-  2: { // Terça-feira
-    dayName: "Terça-feira",
-    morning: {
-      category: "Gestão do Ritmo",
-      target: "Com o Time",
-      headline: "Separação Saudável de Papéis",
-      message: "Você não pode querer o resultado mais do que o seu próprio time quer. Seu papel hoje não é carregar a equipe nas costas, mas sim remover os obstáculos do caminho deles e dar as ferramentas. Dê autonomia com acompanhamento, não com sobrecarga própria.",
-      tactical: "Ao receber uma dúvida de um liderado, devolva perguntando: 'O que você sugere que façamos primeiro?'. Ensine-os a pensar e decidir."
-    },
-    night: {
-      category: "Comunicação Executiva",
-      target: "Autovalidação & Chefia",
-      headline: "Fatos Falam Mais que Desgaste",
-      message: "Se a diretoria não vê o esforço nos bastidores, mostre os fatos de forma executiva, sem carência emocional. Resultados documentados falam por si. Lembre-se: gerência é maratona, não corrida de cem metros. Descanse seu corpo hoje para ter lucidez amanhã.",
-      tactical: "Anote 3 entregas tangíveis da semana em formato de tópicos curtos. Guarde para reportar quando for oportuno, sem pedir validação."
-    }
-  },
-  3: { // Quarta-feira
-    dayName: "Quarta-feira",
-    morning: {
-      category: "Cultura & Vínculo",
-      target: "Com o Time",
-      headline: "O Poder das Microvitórias",
-      message: "Comemore as microvitórias do seu time hoje, por menores que pareçam. Quem está desmotivado precisa voltar a experimentar a sensação de vencer. Um elogio sincero e específico a um colaborador muda a dinâmica do ambiente mais rápido do que um discurso longo.",
-      tactical: "Envie uma mensagem individual no privado para um liderado agradecendo especificamente por uma entrega bem feita esta semana."
-    },
-    night: {
-      category: "Postura & Firmeza",
-      target: "Autovalidação & Chefia",
-      headline: "Você Não É o Seu Crachá",
-      message: "Você não precisa da simpatia da chefia para ser uma líder de alto calibre; você precisa de clareza, limites e alinhamento de expectativas. Se a cobrança for injusta, responda com dados e alternativas viáveis, nunca com desgaste emocional interno.",
-      tactical: "Quando sentir a garganta fechar com uma cobrança brusca, tome um copo d'água antes de responder. Responda do córtex, não da amígdala."
-    }
-  },
-  4: { // Quinta-feira
-    dayName: "Quinta-feira",
-    morning: {
-      category: "Alinhamento & Postura",
-      target: "Com o Time",
-      headline: "Gentileza com Pessoas, Firmeza com Processos",
-      message: "Liderança não é agradar a todos, é inspirar respeito pela coerência. Se houver ruídos, fofocas ou resistências no time, chame para conversas individuais francas e serenas. Firmeza com o processo, gentileza com a pessoa. O clima muda quando a postura do líder é estável.",
-      tactical: "Se alguém trouxer um problema sem solução, estabeleça o padrão: 'Entendido. Traga 2 alternativas viáveis para conversarmos às 15h'."
-    },
-    night: {
-      category: "Saúde Física & Mental",
-      target: "Autovalidação & Chefia",
-      headline: "Limites São a Sua Armadura",
-      message: "A exaustão que você sente é o corpo cobrando os limites que você ainda não colocou no trabalho. Dizer 'não' para demandas inviáveis ou prazos absurdos da chefia faz parte da sua função de gestora estratégica. Salvar sua saúde física é o primeiro dever da sua liderança.",
-      tactical: "Pratique a frase mágica para prazos absurdos: 'Para priorizarmos esta nova entrega com excelência, qual das metas atuais devemos postergar?'."
-    }
-  },
-  5: { // Sexta-feira
-    dayName: "Sexta-feira",
-    morning: {
-      category: "Fechamento Positivo",
-      target: "Com o Time",
-      headline: "Reconhecimento e Ciclo Concluído",
-      message: "Encerre a semana destacando o que deu certo, não apenas o que faltou. O time precisa ir para o descanso sentindo que o esforço valeu a pena. Agradeça a colaboração de cada um e deixe claro que segunda-feira é uma nova oportunidade.",
-      tactical: "Faça uma rodada rápida de 5 minutos de 'destaques da semana' antes das 16h para que todos saiam com sensação de progresso."
-    },
-    night: {
-      category: "Desconexão Total",
-      target: "Autovalidação & Chefia",
-      headline: "Sua Noite de Sexta É Sagrada",
-      message: "Você sobreviveu a mais uma semana intensa e entregou o seu melhor sob condições desafiadoras. Nenhum e-mail urgente da diretoria vale sua noite de sono ou sua saúde mental. Desligue as notificações corporativas: este fim de semana é para você se reconectar consigo mesma.",
-      tactical: "Coloque o aplicativo de mensagens de trabalho no modo 'Silenciar até segunda às 08h'. Sinta o alívio imediato no corpo."
-    }
-  },
-  6: { // Sábado
-    dayName: "Sábado",
-    morning: {
-      category: "Identidade Pessoal",
-      target: "Espaço Pessoal",
-      headline: "Quem É Você Além do Trabalho?",
-      message: "Hoje o dia é todinho seu. Lembre-se de quem você era antes desse cargo existir: seus gostos, seu riso, seus momentos de silêncio. Um líder exausto não tem criatividade para resolver problemas. Permita-se não pensar em metas hoje.",
-      tactical: "Dedique pelo menos 1 hora para uma atividade sem tela: caminhada ao ar livre, café gostoso ou um banho relaxante sem pressa."
-    },
-    night: {
-      category: "Acolhimento & Descanso",
-      target: "Recuperação Profunda",
-      headline: "Você Não É Fraca por Sentir Cansaço",
-      message: "Acolha seus sentimentos sem se julgar fraca. O que você está enfrentando é uma das transições profissionais mais difíceis que existem. Ter dúvidas e cansaço é humano; persistir com dignidade é sua força. Cuide do seu sono esta noite.",
-      tactical: "Escreva num papel qualquer pensamento repetitivo sobre trabalho que surgir e diga a si mesma: 'Isso é problema de segunda-feira'."
-    }
-  },
-  0: { // Domingo
-    dayName: "Domingo",
-    morning: {
-      category: "Visão & Perspectiva",
-      target: "Longo Prazo",
-      headline: "Essa Fase É Temporária",
-      message: "Essa fase difícil não é permanente, é apenas uma etapa de consolidação do seu novo patamar profissional. Você está desenvolvendo casca, maturidade executiva e resiliência que ninguém poderá tirar de você.",
-      tactical: "Não deixe a ansiedade do domingo à tarde roubar seu presente. Viva o domingo até a hora de deitar."
-    },
-    night: {
-      category: "Estratégia & Preparação",
-      target: "Proteção de Energia",
-      headline: "No Comando da Sua Postura",
-      message: "Entre na nova semana sabendo exatamente o que está e o que não está sob o seu controle. O humor da chefia e a atitude inicial do time você não controla; sua reação, seus limites de horário e sua clareza de entrega você controla. Você está no comando.",
-      tactical: "Defina apenas 3 grandes objetivos para a sua semana amanhã. O resto é ruído."
-    }
-  }
-};
+// Bússola da Líder - Controle de Aplicação (31 Dias do Mês)
+// Utiliza os dados de monthMessagesData definidos em messages.js
 
-// Application State
-let selectedDay = new Date().getDay();
-let selectedPeriod = new Date().getHours() < 14 ? 'morning' : 'night';
+// Estado da Aplicação
+const todayObj = new Date();
+const currentDayOfMonth = todayObj.getDate(); // 1 a 31
+const currentMonth = todayObj.getMonth();
+const currentYear = todayObj.getFullYear();
+
+let selectedDay = Math.min(Math.max(currentDayOfMonth, 1), 31);
+let selectedPeriod = todayObj.getHours() < 14 ? 'morning' : 'night';
 let speechSynth = window.speechSynthesis;
 let isSpeaking = false;
 
-// DOM Elements
-const dayButtons = document.querySelectorAll('.day-btn');
+// Elementos DOM
+const daySelectorContainer = document.getElementById('day-selector');
+const phaseIndicator = document.getElementById('phase-indicator');
+const dayCounter = document.getElementById('day-counter');
 const tabMorning = document.getElementById('tab-morning');
 const tabNight = document.getElementById('tab-night');
 const cardCategory = document.getElementById('card-category');
@@ -149,6 +36,7 @@ const greetingText = document.getElementById('greeting-text');
 // Splash / Cover DOM Elements
 const splashScreen = document.getElementById('splash-screen');
 const btnEnterApp = document.getElementById('btn-enter-app');
+const btnCloseSplash = document.getElementById('btn-close-splash');
 const btnShowCover = document.getElementById('btn-show-cover');
 
 // Journal DOM Elements
@@ -160,22 +48,24 @@ const releaseInput = document.getElementById('release-input');
 const btnSaveJournal = document.getElementById('btn-save-journal');
 const saveStatus = document.getElementById('save-status');
 
-// Initialize App
+// Inicialização
 function initApp() {
   updateDateBadge();
+  build31DaySelector();
   setupEventListeners();
   loadSavedTheme();
   renderContent();
   loadJournalForSelectedDay();
   registerServiceWorker();
+  scrollToSelectedDay();
 }
 
 function updateDateBadge() {
   const options = { weekday: 'short', day: 'numeric', month: 'short' };
-  const todayStr = new Intl.DateTimeFormat('pt-BR', options).format(new Date());
+  const todayStr = new Intl.DateTimeFormat('pt-BR', options).format(todayObj);
   currentDateBadge.textContent = todayStr.toUpperCase();
 
-  const hour = new Date().getHours();
+  const hour = todayObj.getHours();
   if (hour < 12) {
     greetingText.textContent = "Bom dia, Líder. Comece seu dia com foco e serenidade.";
   } else if (hour < 18) {
@@ -185,18 +75,73 @@ function updateDateBadge() {
   }
 }
 
-function renderContent() {
-  // Update Day Buttons active state
-  dayButtons.forEach(btn => {
-    const day = parseInt(btn.getAttribute('data-day'));
+// Constrói os 31 botões do mês com dia numérico e dia da semana abreviado
+function build31DaySelector() {
+  daySelectorContainer.innerHTML = '';
+
+  for (let day = 1; day <= 31; day++) {
+    const btn = document.createElement('button');
+    btn.className = 'day-btn';
+    btn.setAttribute('data-day', day);
+
+    // Calcular dia da semana para este dia no mês atual
+    const tempDate = new Date(currentYear, currentMonth, day);
+    const weekdayShort = new Intl.DateTimeFormat('pt-BR', { weekday: 'short' })
+      .format(tempDate)
+      .replace('.', '')
+      .toUpperCase();
+
+    btn.innerHTML = `
+      <span class="day-num">${day}</span>
+      <span class="day-sub">${weekdayShort}</span>
+    `;
+
+    if (day === currentDayOfMonth) {
+      btn.classList.add('is-today');
+      btn.title = 'Hoje';
+    }
+
     if (day === selectedDay) {
       btn.classList.add('active');
+    }
+
+    btn.addEventListener('click', () => {
+      selectedDay = day;
+      renderContent();
+      loadJournalForSelectedDay();
+      updateDayButtonsActive();
+    });
+
+    daySelectorContainer.appendChild(btn);
+  }
+}
+
+function updateDayButtonsActive() {
+  const allBtns = daySelectorContainer.querySelectorAll('.day-btn');
+  allBtns.forEach(b => {
+    const d = parseInt(b.getAttribute('data-day'));
+    if (d === selectedDay) {
+      b.classList.add('active');
+      b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     } else {
-      btn.classList.remove('active');
+      b.classList.remove('active');
     }
   });
+}
 
-  // Update Period Tabs active state
+function scrollToSelectedDay() {
+  setTimeout(() => {
+    const activeBtn = daySelectorContainer.querySelector(`.day-btn[data-day="${selectedDay}"]`);
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, 200);
+}
+
+function renderContent() {
+  updateDayButtonsActive();
+
+  // Abas de período (Manhã vs Noite)
   if (selectedPeriod === 'morning') {
     tabMorning.classList.add('active');
     tabNight.classList.remove('active');
@@ -205,13 +150,21 @@ function renderContent() {
     tabMorning.classList.remove('active');
   }
 
-  // Fetch Message Data
-  const dayData = messagesData[selectedDay];
+  // Buscar dados dos 31 dias (fallback de segurança caso algum dia não exista)
+  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
   const content = dayData[selectedPeriod];
 
-  // Update DOM with smooth fade animation
+  // Indicador de Fase e Contador
+  if (phaseIndicator) {
+    phaseIndicator.textContent = dayData.phase || `Fase da Jornada`;
+  }
+  if (dayCounter) {
+    dayCounter.textContent = `Dia ${selectedDay} de 31`;
+  }
+
+  // Animação suave de transição no card
   const quoteCard = document.getElementById('quote-card');
-  quoteCard.style.opacity = '0.5';
+  quoteCard.style.opacity = '0.4';
   quoteCard.style.transform = 'translateY(4px)';
 
   setTimeout(() => {
@@ -223,9 +176,9 @@ function renderContent() {
 
     quoteCard.style.opacity = '1';
     quoteCard.style.transform = 'translateY(0)';
-  }, 120);
+  }, 100);
 
-  // Stop any active speech synthesis
+  // Parar qualquer áudio em reprodução ao trocar
   if (speechSynth && speechSynth.speaking) {
     speechSynth.cancel();
     isSpeaking = false;
@@ -234,16 +187,7 @@ function renderContent() {
 }
 
 function setupEventListeners() {
-  // Day Selector Click
-  dayButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      selectedDay = parseInt(btn.getAttribute('data-day'));
-      renderContent();
-      loadJournalForSelectedDay();
-    });
-  });
-
-  // Period Tabs Click
+  // Troca de Período (Manhã / Noite)
   tabMorning.addEventListener('click', () => {
     selectedPeriod = 'morning';
     renderContent();
@@ -254,31 +198,29 @@ function setupEventListeners() {
     renderContent();
   });
 
-  // Audio Speech Synthesis
+  // Narração em Áudio
   btnAudio.addEventListener('click', handleSpeechSynthesis);
 
-  // Copy Message to Clipboard
+  // Copiar Mensagem
   btnCopy.addEventListener('click', handleCopyMessage);
 
-  // WhatsApp Share
+  // Compartilhar WhatsApp
   btnWhatsapp.addEventListener('click', handleWhatsappShare);
 
-  // Theme Toggle
+  // Alternar Tema (Dark / Light)
   btnThemeToggle.addEventListener('click', toggleTheme);
 
-  // Journal Toggle (Accordion)
+  // Caderno de Descompressão (Accordion)
   journalToggle.addEventListener('click', () => {
     journalContent.classList.toggle('collapsed');
     const isCollapsed = journalContent.classList.contains('collapsed');
     journalArrow.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
   });
 
-  // Journal Save
+  // Salvar Diário
   btnSaveJournal.addEventListener('click', saveJournalEntry);
 
-  // Splash Screen Cover Handlers
-  const btnCloseSplash = document.getElementById('btn-close-splash');
-
+  // Controle da Capa / Splash Screen
   const closeSplash = () => {
     if (splashScreen) {
       splashScreen.classList.add('hidden');
@@ -312,20 +254,20 @@ function setupEventListeners() {
     btnShowCover.addEventListener('click', openSplash);
   }
 
-  // Close splash screen if clicked outside card
-  splashScreen.addEventListener('click', (e) => {
-    if (e.target === splashScreen) {
-      closeSplash();
-    }
-  });
+  if (splashScreen) {
+    splashScreen.addEventListener('click', (e) => {
+      if (e.target === splashScreen) {
+        closeSplash();
+      }
+    });
 
-  // If already seen in this session, hide immediately
-  if (sessionStorage.getItem('cover_seen') === 'true') {
-    splashScreen.classList.add('hidden');
+    if (sessionStorage.getItem('cover_seen') === 'true') {
+      splashScreen.classList.add('hidden');
+    }
   }
 }
 
-// Text-to-speech functionality
+// Leitura em voz alta
 function handleSpeechSynthesis() {
   if (!('speechSynthesis' in window)) {
     alert("Seu navegador não suporta leitura de voz.");
@@ -339,12 +281,13 @@ function handleSpeechSynthesis() {
     return;
   }
 
-  const currentContent = messagesData[selectedDay][selectedPeriod];
-  const textToRead = `${currentContent.headline}. ${currentContent.message} Dica tática: ${currentContent.tactical}`;
+  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const currentContent = dayData[selectedPeriod];
+  const textToRead = `Dia ${selectedDay}. ${currentContent.headline}. ${currentContent.message} Dica tática: ${currentContent.tactical}`;
 
   const utterance = new SpeechSynthesisUtterance(textToRead);
   utterance.lang = 'pt-BR';
-  utterance.rate = 0.95; // Slightly calmer, articulate pacing
+  utterance.rate = 0.95;
 
   utterance.onstart = () => {
     isSpeaking = true;
@@ -364,10 +307,11 @@ function handleSpeechSynthesis() {
   speechSynth.speak(utterance);
 }
 
-// Copy to Clipboard
+// Copiar para Área de Transferência
 function handleCopyMessage() {
-  const currentContent = messagesData[selectedDay][selectedPeriod];
-  const textToCopy = `✨ ${currentContent.headline} (${messagesData[selectedDay].dayName})\n\n"${currentContent.message}"\n\n💡 Ação Tática: ${currentContent.tactical}\n\n— Bússola da Líder`;
+  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const currentContent = dayData[selectedPeriod];
+  const textToCopy = `✨ Bússola da Líder | Dia ${selectedDay} de 31\n📌 ${dayData.phase}\n\n*${currentContent.headline}*\n"${currentContent.message}"\n\n💡 Ação Tática: ${currentContent.tactical}\n\n— Bússola da Líder`;
 
   navigator.clipboard.writeText(textToCopy).then(() => {
     copyLabel.textContent = "Copiado! ✓";
@@ -379,15 +323,16 @@ function handleCopyMessage() {
   });
 }
 
-// WhatsApp Share
+// Compartilhar no WhatsApp
 function handleWhatsappShare() {
-  const currentContent = messagesData[selectedDay][selectedPeriod];
-  const shareText = `*Bússola da Líder | ${messagesData[selectedDay].dayName}*\n\n*${currentContent.headline}*\n\n"${currentContent.message}"\n\n💡 _Dica Tática:_ ${currentContent.tactical}`;
+  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const currentContent = dayData[selectedPeriod];
+  const shareText = `*Bússola da Líder | Dia ${selectedDay} de 31*\n_${dayData.phase}_\n\n*${currentContent.headline}*\n\n"${currentContent.message}"\n\n💡 _Dica Tática:_ ${currentContent.tactical}`;
   const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
   window.open(url, '_blank');
 }
 
-// Theme handling
+// Temas (Escuro / Claro)
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -402,7 +347,7 @@ function loadSavedTheme() {
   themeIcon.textContent = saved === 'light' ? '☀️' : '🌙';
 }
 
-// Journal Storage
+// Caderno de Descompressão Diário (por dia do mês)
 function saveJournalEntry() {
   const win = winInput.value.trim();
   const release = releaseInput.value.trim();
@@ -413,7 +358,7 @@ function saveJournalEntry() {
     updatedAt: new Date().toISOString()
   };
 
-  localStorage.setItem(`lead_journal_day_${selectedDay}`, JSON.stringify(entry));
+  localStorage.setItem(`lead_journal_day_m_${selectedDay}`, JSON.stringify(entry));
 
   saveStatus.textContent = "Salvo com sucesso! ✨";
   setTimeout(() => {
@@ -422,7 +367,7 @@ function saveJournalEntry() {
 }
 
 function loadJournalForSelectedDay() {
-  const data = localStorage.getItem(`lead_journal_day_${selectedDay}`);
+  const data = localStorage.getItem(`lead_journal_day_m_${selectedDay}`);
   if (data) {
     try {
       const parsed = JSON.parse(data);
@@ -438,7 +383,7 @@ function loadJournalForSelectedDay() {
   }
 }
 
-// Service Worker for offline PWA
+// Service Worker (PWA offline)
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -449,5 +394,5 @@ function registerServiceWorker() {
   }
 }
 
-// Start application
+// Inicializar aplicação
 initApp();
