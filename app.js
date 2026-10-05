@@ -161,6 +161,14 @@ function scrollToSelectedDay() {
   }, 200);
 }
 
+// Retorna os dados da mensagem alinhados ao dia real do calendário
+function getCurrentDayData(day) {
+  if (typeof getLeadershipMessageForDate === 'function') {
+    return getLeadershipMessageForDate(day, currentMonth, currentYear);
+  }
+  return monthMessagesData[day] || monthMessagesData[1];
+}
+
 function renderContent() {
   updateDayButtonsActive();
 
@@ -173,16 +181,16 @@ function renderContent() {
     tabMorning.classList.remove('active');
   }
 
-  // Buscar dados dos 31 dias (fallback de segurança caso algum dia não exista)
-  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  // Buscar dados com precisão de calendário
+  const dayData = getCurrentDayData(selectedDay);
   const content = dayData[selectedPeriod];
 
-  // Indicador de Fase e Contador
+  // Indicador de Fase e Contador com Dia da Semana Real
   if (phaseIndicator) {
     phaseIndicator.textContent = dayData.phase || `Fase da Jornada`;
   }
   if (dayCounter) {
-    dayCounter.textContent = `Dia ${selectedDay} de 31`;
+    dayCounter.textContent = `Dia ${selectedDay} • ${dayData.weekdayName}`;
   }
 
   // Animação suave de transição no card
@@ -404,9 +412,9 @@ function handleSpeechSynthesis() {
     return;
   }
 
-  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const dayData = getCurrentDayData(selectedDay);
   const currentContent = dayData[selectedPeriod];
-  const textToRead = `Dia ${selectedDay}. ${currentContent.headline}. ${currentContent.message} Dica tática: ${currentContent.tactical}`;
+  const textToRead = `${dayData.weekdayName}, dia ${selectedDay}. ${currentContent.headline}. ${currentContent.message} Dica tática: ${currentContent.tactical}`;
 
   const utterance = new SpeechSynthesisUtterance(textToRead);
   utterance.lang = 'pt-BR';
@@ -432,9 +440,9 @@ function handleSpeechSynthesis() {
 
 // Copiar para Área de Transferência
 function handleCopyMessage() {
-  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const dayData = getCurrentDayData(selectedDay);
   const currentContent = dayData[selectedPeriod];
-  const textToCopy = `✨ Bússola da Líder | Dia ${selectedDay} de 31\n📌 ${dayData.phase}\n\n*${currentContent.headline}*\n"${currentContent.message}"\n\n💡 Ação Tática: ${currentContent.tactical}\n\n— Bússola da Líder`;
+  const textToCopy = `✨ Bússola da Líder | Dia ${selectedDay} • ${dayData.weekdayName}\n📌 ${dayData.phase}\n\n*${currentContent.headline}*\n"${currentContent.message}"\n\n💡 Ação Tática: ${currentContent.tactical}\n\n— Bússola da Líder`;
 
   navigator.clipboard.writeText(textToCopy).then(() => {
     copyLabel.textContent = "Copiado! ✓";
@@ -448,9 +456,9 @@ function handleCopyMessage() {
 
 // Compartilhar no WhatsApp
 function handleWhatsappShare() {
-  const dayData = monthMessagesData[selectedDay] || monthMessagesData[1];
+  const dayData = getCurrentDayData(selectedDay);
   const currentContent = dayData[selectedPeriod];
-  const shareText = `*Bússola da Líder | Dia ${selectedDay} de 31*\n_${dayData.phase}_\n\n*${currentContent.headline}*\n\n"${currentContent.message}"\n\n💡 _Dica Tática:_ ${currentContent.tactical}`;
+  const shareText = `*Bússola da Líder | Dia ${selectedDay} • ${dayData.weekdayName}*\n_${dayData.phase}_\n\n*${currentContent.headline}*\n\n"${currentContent.message}"\n\n💡 _Dica Tática:_ ${currentContent.tactical}`;
   const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
   window.open(url, '_blank');
 }
