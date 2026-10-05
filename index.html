@@ -46,6 +46,10 @@
           <span>Acessar Meu Painel Diário</span>
           <span class="btn-arrow">✨</span>
         </button>
+        <button class="splash-secondary-btn" id="btn-splash-install" type="button">
+          <span>📲</span>
+          <span>Salvar App na Tela do Celular</span>
+        </button>
       </div>
     </div>
   </div>
@@ -57,6 +61,10 @@
       <div class="header-top">
         <span class="badge" id="current-date-badge">Hoje</span>
         <div class="header-actions">
+          <button id="btn-install-app" class="install-pill-btn" title="Instalar no celular" aria-label="Instalar app">
+            <span class="install-icon">📲</span>
+            <span>Instalar</span>
+          </button>
           <button id="btn-show-cover" class="icon-btn" title="Ver Capa Inspiradora" aria-label="Ver capa">
             <span>🌸</span>
           </button>
@@ -209,13 +217,146 @@
       </div>
     </section>
 
-    <!-- Install PWA Prompt Banner -->
-    <footer class="install-footer" id="install-guide">
-      <p class="install-tip">
-        📲 <strong>Instale no seu celular:</strong> No Safari (iPhone), toque em <em>Compartilhar</em> e <em>"Adicionar à Tela de Início"</em>. No Chrome (Android), toque nos <em>3 pontinhos</em> e <em>"Instalar aplicativo"</em>.
-      </p>
-    </footer>
+    <!-- Install Banner -->
+    <div class="install-banner" id="install-banner">
+      <div class="install-banner-content">
+        <span class="install-banner-icon">📲</span>
+        <div class="install-banner-text">
+          <strong>Adicione à Tela do Celular</strong>
+          <span>Acesse seu painel com 1 toque todos os dias</span>
+        </div>
+      </div>
+      <button class="install-banner-btn" id="btn-banner-install">
+        <span>Instalar Agora</span>
+      </button>
+    </div>
 
+  </div>
+
+  <!-- Interactive Install Modal (iPhone & Android) -->
+  <div class="install-modal" id="install-modal">
+    <div class="install-modal-backdrop" id="install-modal-backdrop"></div>
+    <div class="install-modal-card">
+      <button class="modal-close-btn" id="btn-close-install-modal" aria-label="Fechar modal">✕</button>
+
+      <div class="install-modal-header">
+        <div class="install-modal-icon-wrap">
+          <img src="icon.svg" alt="Ícone Bússola da Líder" class="install-modal-logo">
+        </div>
+        <h3 class="install-modal-title">Como Salvar na Tela Inicial</h3>
+        <p class="install-modal-sub">Transforme a Bússola da Líder em um app no seu celular, sem precisar baixar na loja.</p>
+      </div>
+
+      <!-- Guia para iPhone / iPad (iOS) -->
+      <div id="install-content-ios" class="device-install-guide">
+        <!-- Alerta caso esteja no navegador do WhatsApp/Instagram -->
+        <div id="ios-inapp-alert" class="inapp-alert hidden">
+          <span class="alert-icon">⚠️</span>
+          <div class="alert-text">
+            <strong>Você está dentro do WhatsApp ou Instagram!</strong>
+            <p>O navegador interno desses aplicativos não permite criar o ícone. Para instalar, toque nos <strong>3 pontinhos (...)</strong> ou no ícone de <strong>compartilhar</strong> no canto da tela e selecione <strong>"Abrir no Safari"</strong>.</p>
+          </div>
+        </div>
+
+        <div class="install-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Toque no botão de Compartilhar no Safari</div>
+              <p class="step-desc">Na barra inferior (ou superior) do Safari, toque no ícone com um quadrado e a seta apontando para cima:</p>
+              <div class="step-visual">
+                <span class="ios-share-badge">
+                  <svg class="apple-share-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                    <polyline points="16 6 12 2 8 6"/>
+                    <line x1="12" y1="2" x2="12" y2="15"/>
+                  </svg>
+                  <span>Ícone de Compartilhar</span>
+                </span>
+              </div>
+              <small class="step-hint">💡 <em>Se a barra do Safari sumiu, dê um toque rápido na parte inferior da tela para ela reaparecer.</em></small>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Selecione "Adicionar à Tela de Início"</div>
+              <p class="step-desc">Role as opções um pouco para cima e toque na opção com o símbolo de mais:</p>
+              <div class="step-visual">
+                <span class="ios-plus-badge">
+                  <svg class="apple-plus-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4"/>
+                    <line x1="12" y1="8" x2="12" y2="16"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                  </svg>
+                  <span>Adicionar à Tela de Início</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Confirme tocando em "Adicionar"</div>
+              <p class="step-desc">No topo direito da janela que abrir, toque em <strong>"Adicionar"</strong>. Pronto! O ícone ficará fixo na tela do seu iPhone como um app.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ios-bottom-hint">
+          <span class="bouncing-arrow">👇</span>
+          <span>Procure a barra do Safari na parte inferior do seu iPhone</span>
+        </div>
+      </div>
+
+      <!-- Guia para Android -->
+      <div id="install-content-android" class="device-install-guide">
+        <div class="android-native-action" id="android-native-action">
+          <button class="primary-btn install-direct-btn" id="btn-trigger-android-install">
+            <span>📲 Instalar Aplicativo Agora</span>
+          </button>
+          <p class="direct-desc">Toque no botão acima para adicionar o app com 1 clique.</p>
+        </div>
+
+        <div class="install-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Ou toque nos 3 pontinhos do Chrome</div>
+              <p class="step-desc">No canto superior direito do Google Chrome, toque no menu de 3 pontinhos:</p>
+              <div class="step-visual">
+                <span class="android-dots-badge">
+                  <svg class="android-dots-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <circle cx="12" cy="5" r="2.2"/>
+                    <circle cx="12" cy="12" r="2.2"/>
+                    <circle cx="12" cy="19" r="2.2"/>
+                  </svg>
+                  <span>Menu (3 pontinhos)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Selecione "Instalar aplicativo"</div>
+              <p class="step-desc">Toque em <strong>"Instalar aplicativo"</strong> ou <strong>"Adicionar à tela inicial"</strong> e confirme.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternador de visualização para testar ou escolher o aparelho -->
+      <div class="modal-device-switch">
+        <button class="switch-link" id="switch-to-ios" type="button">Ver instruções para iPhone (iOS)</button>
+        <button class="switch-link" id="switch-to-android" type="button">Ver instruções para Android</button>
+      </div>
+
+      <button class="modal-done-btn" id="btn-dismiss-install-modal">Fechar Instruções ✨</button>
+    </div>
   </div>
 
   <script src="messages.js"></script>

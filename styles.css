@@ -828,19 +828,412 @@ body {
   color: var(--text-dim);
 }
 
-/* Install Footer */
-.install-footer {
-  text-align: center;
-  padding: 10px 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--border-subtle);
+/* Install Button in Header */
+.install-pill-btn {
+  background: linear-gradient(135deg, #ec4899 0%, #6366f1 100%);
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.install-tip {
+.install-pill-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(236, 72, 153, 0.45);
+}
+
+.splash-secondary-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fce7f3;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.splash-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Install Banner */
+.install-banner {
+  background: var(--bg-surface);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.install-banner.hidden {
+  display: none;
+}
+
+.install-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-banner-icon {
+  font-size: 1.5rem;
+}
+
+.install-banner-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.install-banner-text strong {
+  font-size: 0.88rem;
+  color: var(--text-main);
+}
+
+.install-banner-text span {
   font-size: 0.75rem;
   color: var(--text-muted);
-  line-height: 1.5;
+}
+
+.install-banner-btn {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.install-banner-btn:hover {
+  background: var(--accent-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Interactive Install Modal */
+.install-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.install-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.install-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(12, 15, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.install-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 88vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg-surface);
+  border-radius: 28px 28px 0 0;
+  padding: 24px 20px 36px;
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.install-modal.active .install-modal-card {
+  transform: translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.install-modal-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.install-modal-icon-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: #1e1b4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  overflow: hidden;
+}
+
+.install-modal-logo {
+  width: 100%;
+  height: 100%;
+}
+
+.install-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.install-modal-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* In-App Browser Warning */
+.inapp-alert {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.inapp-alert.hidden {
+  display: none;
+}
+
+.alert-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.alert-text strong {
+  font-size: 0.85rem;
+  color: #fbbf24;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.alert-text p {
+  font-size: 0.78rem;
+  color: #fde68a;
+  line-height: 1.4;
+}
+
+/* Steps Cards */
+.install-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.step-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.step-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.step-visual {
+  margin: 6px 0 2px;
+}
+
+.step-hint {
+  font-size: 0.72rem;
+  color: var(--accent-night);
+  line-height: 1.35;
+}
+
+/* Badges with SVGs */
+.ios-share-badge, .ios-plus-badge, .android-dots-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.ios-share-badge svg, .ios-plus-badge svg {
+  color: #818cf8;
+}
+
+.ios-bottom-hint {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  font-size: 0.78rem;
+  color: var(--accent-night);
+  font-weight: 600;
+}
+
+.bouncing-arrow {
+  font-size: 1.3rem;
+  animation: bounceDown 1.4s infinite ease-in-out;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Android Native Action */
+.android-native-action {
+  text-align: center;
+  padding-bottom: 6px;
+}
+
+.install-direct-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+.direct-desc {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
+.device-install-guide.hidden {
+  display: none;
+}
+
+/* Modal Switch & Dismiss */
+.modal-device-switch {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.switch-link {
+  background: none;
+  border: none;
+  color: var(--accent-night);
+  font-size: 0.76rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modal-done-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.modal-done-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Mobile responsive adjustments */
@@ -856,3 +1249,4 @@ body {
     grid-template-columns: 1fr;
   }
 }
+

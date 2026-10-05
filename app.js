@@ -38,6 +38,29 @@ const splashScreen = document.getElementById('splash-screen');
 const btnEnterApp = document.getElementById('btn-enter-app');
 const btnCloseSplash = document.getElementById('btn-close-splash');
 const btnShowCover = document.getElementById('btn-show-cover');
+const btnSplashInstall = document.getElementById('btn-splash-install');
+
+// Install PWA DOM Elements
+const btnInstallApp = document.getElementById('btn-install-app');
+const installBanner = document.getElementById('install-banner');
+const btnBannerInstall = document.getElementById('btn-banner-install');
+const installModal = document.getElementById('install-modal');
+const installModalBackdrop = document.getElementById('install-modal-backdrop');
+const btnCloseInstallModal = document.getElementById('btn-close-install-modal');
+const btnDismissInstallModal = document.getElementById('btn-dismiss-install-modal');
+const installContentIos = document.getElementById('install-content-ios');
+const installContentAndroid = document.getElementById('install-content-android');
+const iosInappAlert = document.getElementById('ios-inapp-alert');
+const btnTriggerAndroidInstall = document.getElementById('btn-trigger-android-install');
+const switchToIos = document.getElementById('switch-to-ios');
+const switchToAndroid = document.getElementById('switch-to-android');
+
+// Device & PWA State
+let deferredPrompt = null;
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isAndroid = /Android/i.test(navigator.userAgent);
+const isInAppBrowser = /FBAN|FBAV|Instagram|WhatsApp|Line|Twitter|Snapchat/i.test(navigator.userAgent);
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
 // Journal DOM Elements
 const journalToggle = document.getElementById('journal-toggle');
@@ -264,6 +287,106 @@ function setupEventListeners() {
     if (sessionStorage.getItem('cover_seen') === 'true') {
       splashScreen.classList.add('hidden');
     }
+  }
+
+  // PWA Install Prompt handling
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBanner && !isStandalone) installBanner.classList.remove('hidden');
+    if (btnInstallApp && !isStandalone) btnInstallApp.style.display = 'flex';
+  });
+
+  // If already in standalone mode (already installed), hide install triggers
+  if (isStandalone) {
+    if (installBanner) installBanner.classList.add('hidden');
+    if (btnInstallApp) btnInstallApp.style.display = 'none';
+  }
+
+  // Open modal handlers
+  const handleOpenInstall = () => {
+    openInstallModal();
+  };
+
+  if (btnInstallApp) btnInstallApp.addEventListener('click', handleOpenInstall);
+  if (btnBannerInstall) btnBannerInstall.addEventListener('click', handleOpenInstall);
+  if (btnSplashInstall) {
+    btnSplashInstall.addEventListener('click', () => {
+      closeSplash();
+      openInstallModal();
+    });
+  }
+
+  // Modal close handlers
+  if (btnCloseInstallModal) btnCloseInstallModal.addEventListener('click', closeInstallModal);
+  if (btnDismissInstallModal) btnDismissInstallModal.addEventListener('click', closeInstallModal);
+  if (installModalBackdrop) installModalBackdrop.addEventListener('click', closeInstallModal);
+
+  // Switch between iOS and Android guides inside modal
+  if (switchToIos) {
+    switchToIos.addEventListener('click', () => showDeviceGuide('ios'));
+  }
+  if (switchToAndroid) {
+    switchToAndroid.addEventListener('click', () => showDeviceGuide('android'));
+  }
+
+  // Trigger Android native prompt
+  if (btnTriggerAndroidInstall) {
+    btnTriggerAndroidInstall.addEventListener('click', () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            deferredPrompt = null;
+            closeInstallModal();
+            if (installBanner) installBanner.classList.add('hidden');
+            if (btnInstallApp) btnInstallApp.style.display = 'none';
+          }
+        });
+      } else {
+        alert("Para instalar no Chrome: toque nos 3 pontinhos (⋮) no canto superior direito do navegador e selecione 'Instalar aplicativo' ou 'Adicionar à tela inicial'.");
+      }
+    });
+  }
+}
+
+// Funções de Controle do Modal de Instalação
+function openInstallModal(targetDevice) {
+  if (!installModal) return;
+
+  const device = targetDevice || (isIOS ? 'ios' : 'android');
+  showDeviceGuide(device);
+
+  // Alerta especial se estiver navegando pelo WhatsApp / Instagram
+  if (iosInappAlert) {
+    if (isInAppBrowser && (device === 'ios' || isIOS)) {
+      iosInappAlert.classList.remove('hidden');
+    } else {
+      iosInappAlert.classList.add('hidden');
+    }
+  }
+
+  installModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInstallModal() {
+  if (!installModal) return;
+  installModal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function showDeviceGuide(device) {
+  if (device === 'ios') {
+    if (installContentIos) installContentIos.classList.remove('hidden');
+    if (installContentAndroid) installContentAndroid.classList.add('hidden');
+    if (switchToIos) switchToIos.style.display = 'none';
+    if (switchToAndroid) switchToAndroid.style.display = 'inline-block';
+  } else {
+    if (installContentAndroid) installContentAndroid.classList.remove('hidden');
+    if (installContentIos) installContentIos.classList.add('hidden');
+    if (switchToIos) switchToIos.style.display = 'inline-block';
+    if (switchToAndroid) switchToAndroid.style.display = 'none';
   }
 }
 
